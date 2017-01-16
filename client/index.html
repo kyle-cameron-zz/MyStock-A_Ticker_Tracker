@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>myStock - A Ticker Tracker</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  </head>
+  <body ng-app>
+    <div ng-init="tickers = []"> <!-- $scope.tickers = [] -->
+    <h1>myStock</h1>
+    <h4><em>A Ticker Tracker</em></h4>
+
+    <div ng-view>
+      <input type="text" placeholder="Enter ticker here." ng-model="newTicker"/>
+      <button ng-click="tickers.push(newTicker.toUpperCase()); newTicker = ''">Add</button><br/>
+      <ul>
+        <li ng-repeat="ticker in tickers track by $index" ng-click="tickers.splice($index, 1)">
+        {{ticker}} {{tickerPrice}} {{tickerName}}
+        </li>
+      </ul>
+    </div>
+
+    <!-- // <script src="app/app.js"></script> -->
+  </body>
+</html>

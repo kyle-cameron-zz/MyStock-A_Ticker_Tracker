@@ -8,26 +8,35 @@
     // then take the response and separate it into two $scope...
     // ... variables - companyName & stock price
 
-'use strict';
 
 angular.module('myApp', [])
-  .controller('tickerGetter', function($scope, $http){
-    $scope.$watch('search', function() {
-      fetch();
-    });
+  // .config(function($routeProvider, $httpProvider) {
+  //   $routeProvider
+  //     .otherwise({
+  //       templateUrl: 'index.html',
+  //       controller: 'TickerController'
+  //     })
+  // })
+  .controller('TickerController', ['$scope', function($scope, $http){
 
-    $scope.search = "AAPL";
+    $scope.newTicker = "AAPL";
     $scope.tickerName = '';
     $scope.tickerPrice = '';
 
+    $scope.$watch('tickerSubmit', function() {
+      $scope.tickers.push(this.newTicker.toUpperCase())
+      fetch();
+    });
+
     function fetch(){
-      $http.post("/api/tickerName", someParam)
+      console.log('APP.JS fetch is running!!!!!')
+      $http.post("/api/tickerName", $scope.newTicker)
       .then(function(response){ $scope.tickerName = response.data; });
 
-      $http.post("/api/tickerPrice", someParam)
+      $http.post("/api/tickerPrice", $scope.newTicker)
       .then(function(response){ $scope.tickerPrice = response.data; });
     }
-
+  }]);
  // // some code below
  //    $scope.update = function(movie){
  //      $scope.search = movie.Title;
@@ -36,7 +45,6 @@ angular.module('myApp', [])
  //    $scope.select = function(){
  //      this.setSelectionRange(0, this.value.length);
  //    }
-  });
 
   // request({
   //   method: 'GET',

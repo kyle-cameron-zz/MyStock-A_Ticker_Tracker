@@ -1,7 +1,3 @@
-
-
-
-// // vvv example routes below vvv
 var server = require('./controller.js');
 
 module.exports = function (app, express) {

@@ -2,6 +2,7 @@ angular.module('myApp', [])
 
   .controller('TickerController', ['$scope', '$http', function($scope, $http){
     $scope.newTicker = '';
+    // $scope.getDatetime = new Date()
     $scope.tickers = [];
 
     $scope.tickerSubmitter = function() {
@@ -16,7 +17,8 @@ angular.module('myApp', [])
       })
       .then(function(response){
         newObj.price = response.data;
-        $scope.tickers.push(newObj)
+        newObj.time = new Date().toString('yyyy-MM-dd');
+        $scope.tickers.push(newObj);
       });
     };
   }]);

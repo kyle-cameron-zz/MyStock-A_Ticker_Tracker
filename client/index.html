@@ -14,7 +14,7 @@
       <button ng-click='tickerSubmitter()'>Add</button><br/>
       <ul>
         <li ng-repeat="ticker in tickers track by $index" ng-click="tickers.splice($index, 1)">
-          {{ticker.short}}, {{ticker.price}}, {{ticker.name}}
+          {{ticker.short}}, {{ticker.price}}, {{ticker.name}}, {{ticker.time}}
         </li>
       </ul>
     </div>
@@ -24,3 +24,10 @@
     <script src="./app.js"></script>
   </body>
 </html>
+
+
+<!--
+ 1.live reload
+ 2.charts
+ 3.data persistence
+-->

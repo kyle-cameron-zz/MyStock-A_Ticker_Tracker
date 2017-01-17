@@ -40,7 +40,7 @@ angular.module('myApp', [])
               e['price'] = response.data;
               e['time'] = new Date().toString('yyyy-MM-dd');
             });
-          }, 2000)
+          }, 500)
         })
       });
 

@@ -17,25 +17,24 @@ angular.module('myApp', [])
   //       controller: 'TickerController'
   //     })
   // })
-  .controller('TickerController', ['$scope', function($scope, $http){
+  .controller('TickerController', ['$scope', '$http', function($scope, $http){
 
-    $scope.newTicker = "AAPL";
+    $scope.newTicker = '';
+    $scope.tickers = [];
     $scope.tickerName = '';
     $scope.tickerPrice = '';
 
-    $scope.$watch('tickerSubmit', function() {
-      $scope.tickers.push(this.newTicker.toUpperCase())
-      fetch();
-    });
+    $scope.tickerSubmitter = function() {
+      $scope.tickers.push($scope.newTicker.toUpperCase());
 
-    function fetch(){
       console.log('APP.JS fetch is running!!!!!')
-      $http.post("/api/tickerName", $scope.newTicker)
+      $http.post('/api/tickerName', $scope.newTicker)
       .then(function(response){ $scope.tickerName = response.data; });
 
-      $http.post("/api/tickerPrice", $scope.newTicker)
+      $http.post('/api/tickerPrice', $scope.newTicker)
       .then(function(response){ $scope.tickerPrice = response.data; });
-    }
+    };
+
   }]);
  // // some code below
  //    $scope.update = function(movie){

@@ -4,6 +4,7 @@ var app = express();
 app.use(express.static('client'))
 // vv TBU refactor for the below, request of Sam. #itissafertouseabsolutepathname
 // app.use('/static', express.static(path.join(__dirname, 'client')))
+require('./routes.js')(app, express);
 
 var port = process.env.PORT || 3000;
 

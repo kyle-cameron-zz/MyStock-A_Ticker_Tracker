@@ -9,9 +9,9 @@
     <h1>myStock</h1>
     <h4><em>A Ticker Tracker</em></h4>
 
-    <div ng-init="tickers = []">
+    <div>
       <input type="text" placeholder="Enter ticker here." ng-model="newTicker"/>
-      <button ng-click="tickers.push(newTicker.toUpperCase()); newTicker = ''">Add</button><br/>
+      <button ng-click='tickerSubmitter()'>Add</button><br/>
       <ul>
         <li ng-repeat="ticker in tickers track by $index" ng-click="tickers.splice($index, 1)">
         {{ticker}}, {{tickerPrice}}, {{tickerName}}

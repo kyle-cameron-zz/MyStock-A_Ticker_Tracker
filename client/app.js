@@ -16,7 +16,7 @@ angular.module('myApp', [])
       })
       .then((response) => {
         newObj.price = response.data;
-        newObj.style = {color: 'red'};
+        newObj.style = {color: 'black'};
         newObj.time = new Date().toString('yyyy-MM-dd');
         $scope.tickers.push(newObj);
         return $scope.tickers.forEach((e) => {

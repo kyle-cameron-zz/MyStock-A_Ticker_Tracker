@@ -2,16 +2,13 @@ angular.module('myApp', [])
 
   .controller('TickerController', ['$scope', '$interval', '$http', function($scope, $interval, $http){
     $scope.newTicker = '';
-    // $scope.getDatetime = new Date()
+    // $scope.style={}
     $scope.tickers = [];
 
-    $scope.tickerSubmitter = function() {/*$interval(function() {*/
-      // $interval(repeatFunction(), 2000);
-
+    $scope.tickerSubmitter = function() {
       var newObj = {};
       newObj.short = $scope.newTicker.toUpperCase();
       var data = {newTicker: $scope.newTicker};
-
       $http.post('/api/tickerName', data)
       .then((response) => {
         newObj.name = response.data;
@@ -19,6 +16,7 @@ angular.module('myApp', [])
       })
       .then((response) => {
         newObj.price = response.data;
+        newObj.style = {color: 'red'};
         newObj.time = new Date().toString('yyyy-MM-dd');
         $scope.tickers.push(newObj);
         return $scope.tickers.forEach((e) => {
@@ -30,6 +28,15 @@ angular.module('myApp', [])
               return $http.post('/api/tickerPrice', data);
             })
             .then( response => {
+              if(response.data > e['price']) {
+                e['style'] = {color: 'darkgreen'}
+              }
+              else if(response.data < e['price']) {
+                e['style'] = {color: 'red'}
+              }
+              else if(response.data = e['price']) {
+                e['style'] = {color: 'black'}
+              }
               e['price'] = response.data;
               e['time'] = new Date().toString('yyyy-MM-dd');
             });

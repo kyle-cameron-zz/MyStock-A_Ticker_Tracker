@@ -10,9 +10,11 @@
     "start": "nodemon server.js"
   },
   "dependencies": {
-    "body-parser": "^1.4.3",
+    "bluebird": "^3.4.7",
+    "body-parser": "^1.15.2",
     "express": "^4.4.5",
     "q": "^1.4.1",
-    "request": "^2.79.0"
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1"
   }
 }

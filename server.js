@@ -1,9 +1,10 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser')
 
 app.use(express.static('client'))
-// vv TBU refactor for the below, request of Sam. #itissafertouseabsolutepathname
-// app.use('/static', express.static(path.join(__dirname, 'client')))
+app.use(bodyParser.json())
+
 require('./routes.js')(app, express);
 
 var port = process.env.PORT || 3000;

@@ -43,13 +43,7 @@ angular.module('myApp', [])
           }, 500)
         })
       });
-
-
     }
-
-
-
-
   }]);
 
   // $interval(fn, delay, [count], [invokeApply], [Pass]);

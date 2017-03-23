@@ -1,13 +1,13 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser')
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 
-app.use(express.static('client'))
-app.use(bodyParser.json())
+app.use(express.static('client'));
+app.use(bodyParser.json());
 
 require('./routes.js')(app, express);
 
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 app.listen(port);
 

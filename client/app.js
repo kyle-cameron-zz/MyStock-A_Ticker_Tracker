@@ -1,14 +1,50 @@
-angular.module('myApp', [])
-
+angular.module('MyStock', [
+  'MyStock.Auth.Service',
+  'MyStock.Auth.Controller',
+  // 'MyStock.Goals.Service',
+  // 'MyStock.Detail.Controller',
+  // 'MyStock.GoalForm.Controller',
+  // 'MyStock.Goals.Controller',
+  'ngRoute'
+])
+  .config(function ($routeProvider, $httpProvider, $locationProvider) {
+    $routeProvider
+      .when('/main', {
+        templateUrl: 'views/main.html',
+        controller: 'MainController',
+        authenticate: true
+      })
+      .when('/search', {
+        templateUrl: 'views/search.html',
+        controller: 'SearchController',
+        authenticate: true
+      })
+      .when('/signin', {
+        templateUrl: 'views/login.html',
+        controller: 'AuthController'
+      })
+      .when('/signup', {
+        templateUrl: 'views/signup.html',
+        controller: 'AuthController'
+      })
+      .when('/about', {
+        templateUrl: 'views/about.html',
+        controller: 'AboutController'
+      })
+      .otherwise({
+        redirectTo: '/main'
+      });
+    $locationProvider.html5Mode(true);
+    $httpProvider.interceptors.push('AttachTokens');
+  })
   .controller('TickerController', ['$scope', '$interval', '$http', function($scope, $interval, $http){
     $scope.newTicker = '';
-    // $scope.style={}
     $scope.tickers = [];
 
     $scope.tickerSubmitter = function() {
-      var newObj = {};
+      const newObj = {};
       newObj.short = $scope.newTicker.toUpperCase();
-      var data = {newTicker: $scope.newTicker};
+      const data = {newTicker: $scope.newTicker};
       $http.post('/api/tickerName', data)
       .then((response) => {
         newObj.name = response.data;
@@ -21,7 +57,7 @@ angular.module('myApp', [])
         $scope.tickers.push(newObj);
         return $scope.tickers.forEach((e) => {
           $interval( () => {
-            var data = {newTicker: e['short']};
+            const data = {newTicker: e['short']};
             return $http.post('/api/tickerName', data)
             .then( response => {
               e['name'] = response.data;
@@ -45,5 +81,3 @@ angular.module('myApp', [])
       });
     }
   }]);
-
-  // $interval(fn, delay, [count], [invokeApply], [Pass]);

@@ -1,5 +1,5 @@
-var request = require('request');
-var rp = require('request-promise');
+let request = require('request');
+const rp = require('request-promise');
 
 module.exports =  {
 
